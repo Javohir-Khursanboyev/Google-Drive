@@ -14,4 +14,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GoogleDrive.Domain\GoogleDrive.Domain.csproj" />
+    <ProjectReference Include="..\GoogleDrive.UI\GoogleDrive.UI.csproj" />
+  </ItemGroup>
+
 </Project>
