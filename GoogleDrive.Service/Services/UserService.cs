@@ -14,7 +14,7 @@ public class UserService : IUserService
     UserReader reader = new UserReader();
     UserWriter writer = new UserWriter();
 
-    public async ValueTask<bool> DeleteAsync(long id)
+    public async Task<bool> DeleteAsync(long id)
     {
         users = reader.Read();
 
@@ -28,7 +28,7 @@ public class UserService : IUserService
 
         return true;
     }
-    public async ValueTask<UserModel> GetAsync(long id)
+    public async Task<UserModel> GetAsync(long id)
     {
         users = reader.Read();
 
@@ -37,7 +37,7 @@ public class UserService : IUserService
 
         return existingUser;
     }
-    public async ValueTask<UserViewModel> ViewAsync(long id)
+    public async Task<UserViewModel> ViewAsync(long id)
     {
         users = reader.Read();
 
@@ -46,14 +46,14 @@ public class UserService : IUserService
 
         return existingUser.MapTo<UserViewModel>();
     }
-    public async ValueTask<List<UserViewModel>> GetAllAsync()
+    public async Task<List<UserViewModel>> GetAllAsync()
     {
         users = reader.Read();
 
         var usersExist = users.Where(p => !p.IsDeleted).ToList();
         return usersExist.MapTo<UserViewModel>().ToList();
     }
-    public async ValueTask<UserViewModel> CreateAsync(UserCreationModel user)
+    public async Task<UserViewModel> CreateAsync(UserCreationModel user)
     {
         users = reader.Read();
 
@@ -69,7 +69,7 @@ public class UserService : IUserService
 
         return createdUser.MapTo<UserViewModel>();
     }
-    public async ValueTask<UserViewModel> UpdateAsync(long id, UserUpdateModel userUpdate)
+    public async Task<UserViewModel> UpdateAsync(long id, UserUpdateModel userUpdate)
     {
         users = reader.Read();
 
@@ -85,7 +85,7 @@ public class UserService : IUserService
 
         return existingUser.MapTo<UserViewModel>();
     }
-    public async ValueTask<UserModel> GetToLoginAsync(string Email, string password)
+    public async Task<UserModel> GetToLoginAsync(string Email, string password)
     {
         users = reader.Read();
 
