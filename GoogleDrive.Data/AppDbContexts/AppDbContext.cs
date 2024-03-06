@@ -1,4 +1,4 @@
-﻿using GoogleDrive.Domain.Entities.UserModels;
+﻿using GoogleDrive.Domain.Entities.UserModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoogleDrive.Data.AppDbContexts;

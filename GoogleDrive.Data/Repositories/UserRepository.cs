@@ -1,7 +1,7 @@
-﻿using GoogleDrive.Data.AppDbContexts;
+using GoogleDrive.Data.AppDbContexts;
 using GoogleDrive.Data.IRepositories;
-using GoogleDrive.Domain.Entities.UserModels;
 using Microsoft.EntityFrameworkCore;
+using GoogleDrive.Domain.Entities.UserModel;
 
 namespace GoogleDrive.Data.Repositories;
 
@@ -14,7 +14,7 @@ public class UserRepository : IUserRepository
     }
     public async Task<bool> DeleteAsync(long id)
     {
-        var existUser = await context.users.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);  
+        var existUser = await context.users.FirstAsync(u => u.Id == id && !u.IsDeleted);  
         if(existUser != null)
             existUser.IsDeleted = true;
         context.SaveChanges();
@@ -29,14 +29,14 @@ public class UserRepository : IUserRepository
 
     public async Task<UserModel> InsertAsync(UserModel user)
     {
-        var createdUser = await context.users.AddAsync(user);
+        var createdUser = await context.users.AddAsync(user); 
         context.SaveChanges();
         return createdUser.Entity;
     }
 
     public async Task<UserModel> UpdateAsync(long id, UserModel user)
     {
-        var existUser = await context.users.FirstOrDefaultAsync(u => u.Id == id);
+        var existUser = await context.users.FirstAsync(u => u.Id == id);
         existUser.FirstName = user.FirstName;
         existUser.LastName = user.LastName;
         existUser.Email = user.Email;
