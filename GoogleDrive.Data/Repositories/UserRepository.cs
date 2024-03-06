@@ -15,8 +15,8 @@ public class UserRepository : IUserRepository
     public async Task<bool> DeleteAsync(long id)
     {
         var existUser = await context.users.FirstAsync(u => u.Id == id && !u.IsDeleted);  
-        if(existUser != null)
-            existUser.IsDeleted = true;
+        existUser.IsDeleted = true;
+        existUser.DeletedAt = DateTime.UtcNow;
         context.SaveChanges();
         return true;
     }
