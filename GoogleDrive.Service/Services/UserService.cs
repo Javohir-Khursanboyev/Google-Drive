@@ -1,34 +1,97 @@
 ﻿using GoogleDrive.Domain.DTOs.UserModels;
 using GoogleDrive.Domain.Entities.UserModel;
+using GoogleDrive.Domain.Entities.UserModels;
+using GoogleDrive.Service.Extensions;
+using GoogleDrive.Service.Helpers;
 using GoogleDrive.Service.Interfaces;
 
 namespace GoogleDrive.Service.Services;
 
 public class UserService : IUserService
 {
+    private List<UserModel> users = new List<UserModel>();
 
-    public ValueTask<UserViewModel> CreateAsync(UserCreationModel user)
+    UserReader reader = new UserReader();
+    UserWriter writer = new UserWriter();
+
+    public async ValueTask<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        users = reader.Read();
+
+        var existingUser = users.FirstOrDefault(x => x.Id == id && !x.IsDeleted)
+            ?? throw new Exception("User is not found");
+
+        existingUser.IsDeleted = true;
+        existingUser.DeletedAt = DateTime.UtcNow;
+
+        writer.Write(users);
+
+        return true;
     }
-
-    public ValueTask<bool> DeleteAsync(long id)
+    public async ValueTask<UserModel> GetAsync(long id)
     {
-        throw new NotImplementedException();
+        users = reader.Read();
+
+        var existingUser = users.FirstOrDefault(x => x.Id == id && !x.IsDeleted)
+            ?? throw new Exception("User is not found");
+
+        return existingUser;
     }
-
-    public ValueTask<UserModel> GetAsync(long id)
+    public async ValueTask<UserViewModel> ViewAsync(long id)
     {
-        throw new NotImplementedException();
+        users = reader.Read();
+
+        var existingUser = users.FirstOrDefault(x => x.Id == id && !x.IsDeleted)
+            ?? throw new Exception("User is not found");
+
+        return existingUser.MapTo<UserViewModel>();
     }
-
-    public ValueTask<UserViewModel> UpdateAsync(long id, UserUpdateModel user)
+    public async ValueTask<List<UserViewModel>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        users = reader.Read();
+
+        var usersExist = users.Where(p => !p.IsDeleted).ToList();
+        return usersExist.MapTo<UserViewModel>().ToList();
     }
-
-    public ValueTask<UserViewModel> ViewAsync(long id)
+    public async ValueTask<UserViewModel> CreateAsync(UserCreationModel user)
     {
-        throw new NotImplementedException();
+        users = reader.Read();
+
+        // IsDeleted ???
+        if (users.Any(p => !p.IsDeleted && p.Email == user.Email))
+        {
+            throw new Exception("User with the same phone number or email already exists. ");
+        }
+
+        var createdUser = users.Create(MapperExtension.MapTo<UserModel>(user));
+
+        writer.Write(users);
+
+        return createdUser.MapTo<UserViewModel>();
+    }
+    public async ValueTask<UserViewModel> UpdateAsync(long id, UserUpdateModel userUpdate)
+    {
+        users = reader.Read();
+
+        var existingUser = users.FirstOrDefault(x => x.Id == id && !x.IsDeleted)
+            ?? throw new Exception("User is not found");
+
+        existingUser.Id = id;
+        existingUser.Email = userUpdate.Email;
+        existingUser.LastName = userUpdate.LastName;
+        existingUser.FirstName = userUpdate.FirstName;
+
+        writer.Write(users);
+
+        return existingUser.MapTo<UserViewModel>();
+    }
+    public async ValueTask<UserModel> GetToLoginAsync(string Email, string password)
+    {
+        users = reader.Read();
+
+        var existCustomer = users.FirstOrDefault(customer => customer.Email == Email && PasswordHashing.VerifyPassword(customer.Password, password) && !customer.IsDeleted)
+            ?? throw new Exception($"Customer is not exists with Email ({Email}) or incorrect password");
+        return existCustomer;
     }
 }
+
