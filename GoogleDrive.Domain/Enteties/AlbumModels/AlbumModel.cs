@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GoogleDrive.Domain.Commons;
+﻿using GoogleDrive.Domain.Commons;
 
-namespace GoogleDrive.Models.AlbumModels;
+namespace GoogleDrive.Domain.Entities.AlbumModels;
 
 public class AlbumModel : Auditable
 {
