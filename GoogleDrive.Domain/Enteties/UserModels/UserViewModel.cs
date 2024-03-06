@@ -1,4 +1,6 @@
-﻿namespace GoogleDrive.Domain.Entities.UserModels;
+﻿using GoogleDrive.Domain.Enums;
+
+namespace GoogleDrive.Domain.Entities.UserModels;
 
 public class UserViewModel
 {
@@ -7,5 +9,5 @@ public class UserViewModel
     public string LastName { get; set; }
     public string UserName { get; set; }
     public string Email { get; set; }
-
+    public Privacy Privacy { get; set; }
 }
