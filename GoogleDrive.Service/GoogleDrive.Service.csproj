@@ -8,6 +8,8 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\GoogleDrive.Data\GoogleDrive.Data.csproj" />
+
     <ProjectReference Include="..\GoogleDrive.Domain\GoogleDrive.Domain.csproj" />
                
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
