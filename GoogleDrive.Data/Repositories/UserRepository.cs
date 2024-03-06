@@ -1,7 +1,7 @@
 using GoogleDrive.Data.AppDbContexts;
 using GoogleDrive.Data.IRepositories;
+using GoogleDrive.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
-using GoogleDrive.Domain.Entities.UserModel;
 
 namespace GoogleDrive.Data.Repositories;
 
@@ -21,20 +21,20 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public async Task<List<UserModel>> GetAllAsync()
+    public async Task<List<User>> GetAllAsync()
     {
         var users = await context.users.ToListAsync();
         return users;
     }
 
-    public async Task<UserModel> InsertAsync(UserModel user)
+    public async Task<User> InsertAsync(User user)
     {
         var createdUser = await context.users.AddAsync(user); 
         context.SaveChanges();
         return createdUser.Entity;
     }
 
-    public async Task<UserModel> UpdateAsync(long id, UserModel user)
+    public async Task<User> UpdateAsync(long id, User user)
     {
         var existUser = await context.users.FirstAsync(u => u.Id == id);
         existUser.FirstName = user.FirstName;

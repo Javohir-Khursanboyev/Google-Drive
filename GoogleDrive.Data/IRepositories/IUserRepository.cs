@@ -1,14 +1,11 @@
-using GoogleDrive.Domain.Entities.UserModels;
-
-﻿using GoogleDrive.Domain.Entities.UserModel;
-
+using GoogleDrive.Domain.Entities.Users;
 
 namespace GoogleDrive.Data.IRepositories;
 
 public interface IUserRepository
 {
-    Task<UserModel> InsertAsync(UserModel user);
-    Task<UserModel> UpdateAsync(long id, UserModel user);
+    Task<User> InsertAsync(User user);
+    Task<User> UpdateAsync(long id, User user);
     Task<bool> DeleteAsync(long id);
-    Task<List<UserModel>> GetAllAsync();
+    Task<List<User>> GetAllAsync();
 }
