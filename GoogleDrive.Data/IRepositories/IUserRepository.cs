@@ -7,5 +7,5 @@ public interface IUserRepository
     Task<User> InsertAsync(User user);
     Task<User> UpdateAsync(long id, User user);
     Task<bool> DeleteAsync(long id);
-    Task<List<User>> GetAllAsync();
+    Task<IEnumerable<User>> GetAllAsync();
 }
