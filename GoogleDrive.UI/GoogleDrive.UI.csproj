@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GoogleDrive.Domain\GoogleDrive.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

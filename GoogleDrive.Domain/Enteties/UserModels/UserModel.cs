@@ -1,11 +1,6 @@
 ﻿using GoogleDrive.Domain.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GoogleDrive.Models.UserModels;
+namespace GoogleDrive.Domain.Entities.UserModels;
 
 public class UserModel : Auditable
 {
