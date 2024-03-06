@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.UI", "GoogleDrive.UI\GoogleDrive.UI.csproj", "{FEED2AC0-0258-4AAD-AB77-BA19090630FB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.Domain", "GoogleDrive.Domain\GoogleDrive.Domain.csproj", "{AFE49114-94C9-4FC4-938B-6F6EA7E5C26A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.Data", "GoogleDrive.Data\GoogleDrive.Data.csproj", "{9063C522-D195-4377-B0BE-CD15821C14A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.Service", "GoogleDrive.Service\GoogleDrive.Service.csproj", "{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDrive.Menu", "GoogleDrive.Menu\GoogleDrive.Menu.csproj", "{AF955081-BF75-4A3D-84CB-5845B7175C98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FEED2AC0-0258-4AAD-AB77-BA19090630FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEED2AC0-0258-4AAD-AB77-BA19090630FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEED2AC0-0258-4AAD-AB77-BA19090630FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEED2AC0-0258-4AAD-AB77-BA19090630FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFE49114-94C9-4FC4-938B-6F6EA7E5C26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFE49114-94C9-4FC4-938B-6F6EA7E5C26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE49114-94C9-4FC4-938B-6F6EA7E5C26A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,9 @@
-﻿namespace GoogleDrive.UI
+﻿namespace GoogleDrive.UI;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-        }
+        
     }
 }

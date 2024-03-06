@@ -21,7 +21,7 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public async Task<List<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
         var users = await context.users.ToListAsync();
         return users;
