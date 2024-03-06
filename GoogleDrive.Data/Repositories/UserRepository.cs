@@ -1,30 +1,52 @@
-﻿using GoogleDrive.Data.IRepositories;
+using GoogleDrive.Data.AppDbContexts;
+using GoogleDrive.Data.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using GoogleDrive.Domain.Entities.UserModel;
 
 namespace GoogleDrive.Data.Repositories;
 
 public class UserRepository : IUserRepository
 {
-
-    public Task<bool> DeleteAsync(long id)
+    public AppDbContext context;
+    public UserRepository(AppDbContext context)
     {
-        throw new NotImplementedException();
+        this.context = context;
+    }
+    public async Task<bool> DeleteAsync(long id)
+    {
+        var existUser = await context.users.FirstAsync(u => u.Id == id && !u.IsDeleted);  
+        if(existUser != null)
+            existUser.IsDeleted = true;
+        context.SaveChanges();
+        return true;
     }
 
-    public Task<UserModel> GetAllAsync()
+    public async Task<List<UserModel>> GetAllAsync()
     {
-
-        throw new NotImplementedException();
+        var users = await context.users.ToListAsync();
+        return users;
     }
 
     public async Task<UserModel> InsertAsync(UserModel user)
     {
-
-        throw new NotImplementedException();
+        var createdUser = await context.users.AddAsync(user); 
+        context.SaveChanges();
+        return createdUser.Entity;
     }
 
-    public Task<UserModel> UpdateAsync(long id, UserModel user)
+    public async Task<UserModel> UpdateAsync(long id, UserModel user)
     {
-        throw new NotImplementedException();
+        var existUser = await context.users.FirstAsync(u => u.Id == id);
+        existUser.FirstName = user.FirstName;
+        existUser.LastName = user.LastName;
+        existUser.Email = user.Email;
+        existUser.UserName = user.UserName;
+        existUser.Password = user.Password;
+        existUser.Privacy = user.Privacy;
+        existUser.UpdatedAt = DateTime.UtcNow;
+        existUser.IsDeleted = false;
+        context.SaveChanges();
+
+        return existUser;
     }
 }

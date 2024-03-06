@@ -1,6 +1,8 @@
-﻿namespace GoogleDrive.Domain.DTOs.ContentModels;
+﻿using GoogleDrive.Domain.Commons;
 
-public class ContentCreationModel
+namespace GoogleDrive.Domain.Entities.ContentModels;
+
+public class ContentModel : Auditable
 {
     public string Name { get; set; }
     public string Description { get; set; }

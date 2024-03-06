@@ -1,4 +1,4 @@
-﻿namespace GoogleDrive.Domain.DTOs.AlbumModels;
+﻿namespace GoogleDrive.Domain.Entities.AlbumModels;
 
 public class AlbumViewModel
 {

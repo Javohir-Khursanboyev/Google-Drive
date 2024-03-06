@@ -1,4 +1,4 @@
-﻿namespace GoogleDrive.Domain.DTOs.ContentModels;
+﻿namespace GoogleDrive.Domain.Entities.ContentModels;
 
 public class ContentViewModel
 {
