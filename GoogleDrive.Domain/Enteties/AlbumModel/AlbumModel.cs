@@ -1,6 +1,6 @@
 ﻿using GoogleDrive.Domain.Commons;
 
-namespace GoogleDrive.Domain.Entities.AlbumModels;
+namespace GoogleDrive.Domain.Entities.AlbumModel;
 
 public class AlbumModel : Auditable
 {

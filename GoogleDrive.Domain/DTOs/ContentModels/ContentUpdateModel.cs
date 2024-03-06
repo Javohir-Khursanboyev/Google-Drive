@@ -1,4 +1,4 @@
-﻿namespace GoogleDrive.Domain.Entities.ContentModels;
+﻿namespace GoogleDrive.Domain.DTOs.ContentModels;
 
 public class ContentUpdateModel
 {

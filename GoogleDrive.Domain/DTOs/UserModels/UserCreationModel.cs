@@ -1,4 +1,4 @@
-﻿namespace GoogleDrive.Domain.Entities.UserModels;
+﻿namespace GoogleDrive.Domain.DTOs.UserModels;
 
 public class UserCreationModel
 {
