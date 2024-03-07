@@ -32,9 +32,12 @@ public class ContentService : IContentService
         return true;
     }
 
-    public async Task<IEnumerable<ContentViewModel>> GetAllAsync()
+    public async Task<IEnumerable<ContentViewModel>> GetAllAsync(long ? userId = null)
     {
         var contents = await contentRepository.GetAllAsync();
+        if(userId is not null)
+            return contents.Where(c => !c.IsDeleted && c.UserId == userId).MapTo<ContentViewModel>();
+
         return contents.Where(c => !c.IsDeleted).MapTo<ContentViewModel>();
     }
 
