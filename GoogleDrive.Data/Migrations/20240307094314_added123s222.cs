@@ -7,19 +7,22 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoogleDrive.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedAlbum : Migration
+    public partial class added123s222 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "albums",
+                name: "contents",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    SetDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ImageDates = table.Column<byte[]>(type: "bytea", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
+                    AlbumId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -27,9 +30,15 @@ namespace GoogleDrive.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_albums", x => x.Id);
+                    table.PrimaryKey("PK_contents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_albums_users_UserId",
+                        name: "FK_contents_albums_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "albums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_contents_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
                         principalColumn: "Id",
@@ -37,8 +46,13 @@ namespace GoogleDrive.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_albums_UserId",
-                table: "albums",
+                name: "IX_contents_AlbumId",
+                table: "contents",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_contents_UserId",
+                table: "contents",
                 column: "UserId");
         }
 
@@ -46,7 +60,7 @@ namespace GoogleDrive.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "albums");
+                name: "contents");
         }
     }
 }

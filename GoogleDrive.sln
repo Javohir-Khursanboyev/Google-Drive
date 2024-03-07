@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.Data", "GoogleD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleDrive.Service", "GoogleDrive.Service\GoogleDrive.Service.csproj", "{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDrive.Menu", "GoogleDrive.Menu\GoogleDrive.Menu.csproj", "{AF955081-BF75-4A3D-84CB-5845B7175C98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDrive.Menu", "GoogleDrive.Menu\GoogleDrive.Menu.csproj", "{122DE483-04EC-48D4-BB85-309B2D3949B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9F89784-B5E3-44E7-A1A4-C75E39B37E30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF955081-BF75-4A3D-84CB-5845B7175C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122DE483-04EC-48D4-BB85-309B2D3949B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122DE483-04EC-48D4-BB85-309B2D3949B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122DE483-04EC-48D4-BB85-309B2D3949B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122DE483-04EC-48D4-BB85-309B2D3949B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
