@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GoogleDrive.Data\GoogleDrive.Data.csproj" />
+    <ProjectReference Include="..\GoogleDrive.Service\GoogleDrive.Service.csproj" />
   </ItemGroup>
 
 </Project>
