@@ -9,7 +9,7 @@ public class Content:Auditable
     public string Description { get; set; }
     public DateTime SetDate { get; set; } = DateTime.UtcNow;
     public byte[] ImageDates { get; set; }
-
+     
     public long UserId { get; set; }
     public User User { get; set; }
 }
