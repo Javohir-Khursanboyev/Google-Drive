@@ -107,14 +107,14 @@ namespace GoogleDrive.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("ChatId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
@@ -125,17 +125,8 @@ namespace GoogleDrive.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Privacy")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
