@@ -16,7 +16,6 @@ public class ContentService : IContentService
     }
     public async Task<ContentViewModel> CreateAsync(ContentCreationModel content)
     {
-        var existAlbum = await albumService.GetByIdAsync(content.AlbumId);
 
         var javohir = content.MapTo<Content>();
         var createdContent = await contentRepository.InsertAsync(content.MapTo<Content>());
