@@ -5,13 +5,16 @@ using GoogleDrive.Service.Extensions;
 using GoogleDrive.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GoogleDrive.Service.Service;
 
@@ -96,17 +99,17 @@ public class TelegramBotService
         if(message.Document != null)
         {
             var file = await client.GetFileAsync(message.Document.FileId);
-            FileStream fs = new FileStream(@"..\..\..\..\GoogleDrive.Domain\Images\testImage", FileMode.Create,FileAccess.Write);
+            FileStream fs = new FileStream($@"..\..\..\..\GoogleDrive.Domain\Images\testImage_{message.Chat.Id}", FileMode.Create,FileAccess.Write);
             await client.DownloadFileAsync(file.FilePath, fs);
             ContentCreationModel content = new ContentCreationModel()
             {
-                UserId = 1,
+                UserId = existUser.Id,
             };
 
             fs.Close();
             fs.Dispose();
 
-            using (var stream = new FileStream(@"..\..\..\..\GoogleDrive.Domain\Images\testImage", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream($@"..\..\..\..\GoogleDrive.Domain\Images\testImage_{message.Chat.Id}", FileMode.Open, FileAccess.Read))
             using (var memoryStream = new MemoryStream())
             {
                 stream.CopyTo(memoryStream);
@@ -114,19 +117,22 @@ public class TelegramBotService
             }
             await contentService.CreateAsync(content);
 
-            using (StreamWriter sw = new StreamWriter(@"..\..\..\..\GoogleDrive.Domain\Images\testImage", false))
+            using (StreamWriter sw = new StreamWriter($@"..\..\..\..\GoogleDrive.Domain\Images\testImage_{message.Chat.Id}", false))
             {
-                sw.Write("");
+                await sw.WriteAsync("");
             }
         }
-        if(message.Text.ToLower() == "my pictures")
+        if(message?.Text?.ToLower() == "my pictures")
         {
-            var pictures = await contentService.GetAllAsync();
+            var pictures = await contentService.GetAllAsync(existUser.Id);
             foreach(var picture in pictures)
             {
-                MemoryStream mStream = new MemoryStream();
-                mStream.Read(picture.ImageDates);
-                await client.SendDocumentAsync(message.Chat.Id, new InputFileStream(mStream));
+                StreamWriter sw = new StreamWriter($@"..\..\..\..\GoogleDrive.Domain\Images\testImage_{message.Chat.Id}", false);
+                sw.Write(picture.ImageDates);
+                sw.Close();
+                await using Stream stream = System.IO.File.OpenRead($@"..\..\..\..\GoogleDrive.Domain\Images\testImage_{message.Chat.Id}");
+                await client.SendDocumentAsync(message.Chat.Id, new InputFileStream(stream, "Image.png"));
+
             }
         }
     }

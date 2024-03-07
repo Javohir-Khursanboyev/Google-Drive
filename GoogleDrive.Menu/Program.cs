@@ -37,6 +37,14 @@ using GoogleDrive.Service.Service;
 internal class Program { 
     static async Task Main(string[] args) 
     {
-        
+        AppDbContext appDbContext = new AppDbContext();
+        UserRepository userRepository = new UserRepository(appDbContext);
+        UserService userService = new UserService(userRepository);
+        ContentRepository contentRepository = new ContentRepository(appDbContext);
+        AlbumRepository albumRepository = new AlbumRepository(appDbContext);
+        AlbumService albumService = new AlbumService(albumRepository, userService);
+        ContentService contentService = new ContentService(contentRepository, albumService);
+        TelegramBotService telegramBotService = new TelegramBotService(appDbContext, userService, contentService);
+        await telegramBotService.Run();
     }
 }
