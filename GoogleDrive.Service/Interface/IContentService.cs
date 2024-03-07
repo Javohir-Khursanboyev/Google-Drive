@@ -8,5 +8,5 @@ public interface IContentService
     Task<ContentViewModel> UpdateAsync(long id, ContentUpdateModel content);
     Task<bool> DeleteAsync(long id);
     Task<ContentViewModel> GetByIdAsync(long id);
-    Task<IEnumerable<ContentViewModel>> GetAllAsync();
+    Task<IEnumerable<ContentViewModel>> GetAllAsync(long ? userId);
 }
