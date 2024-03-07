@@ -39,10 +39,6 @@ public class UserRepository : IUserRepository
         var existUser = await context.users.FirstAsync(u => u.Id == id);
         existUser.FirstName = user.FirstName;
         existUser.LastName = user.LastName;
-        existUser.Email = user.Email;
-        existUser.UserName = user.UserName;
-        existUser.Password = user.Password;
-        existUser.Privacy = user.Privacy;
         existUser.UpdatedAt = DateTime.UtcNow;
         existUser.IsDeleted = false;
         context.SaveChanges();

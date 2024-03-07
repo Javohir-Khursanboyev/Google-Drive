@@ -15,14 +15,10 @@ public class UserService : IUserService
     public async Task<UserViewModel> CreateAsync(UserCreationModel user)
     {
         var users = await userRepository.GetAllAsync();
-        var existUser = users.FirstOrDefault(u => u.UserName == user.UserName);
-        if(existUser != null)
-        {
-            if (existUser.IsDeleted)
-                return await UpdateAsync(existUser.Id, user.MapTo<UserUpdatedModel>(), true);
-            throw new Exception($"This user is already exist With this UserName {user.UserName}");
-        }
-
+        var existUser = users.FirstOrDefault(u => u.ChatId == user.ChatId);
+        if(existUser != null) 
+            return await UpdateAsync(existUser.Id, user.MapTo<UserUpdatedModel>());
+        
         var createdUser = userRepository.InsertAsync(user.MapTo<User>());
         return createdUser.MapTo<UserViewModel>();
     }
@@ -52,14 +48,11 @@ public class UserService : IUserService
         return existUser.MapTo<UserViewModel>();
     }
 
-    public async Task<UserViewModel> UpdateAsync(long id, UserUpdatedModel user, bool isUsesDeleted = false)
+    public async Task<UserViewModel> UpdateAsync(long id, UserUpdatedModel user)
     {
         var users = await userRepository.GetAllAsync();
-        var existUser = new User();
-        if (isUsesDeleted)
-            existUser = users.First(u => u.Id == id);
-        else
-            existUser = users.FirstOrDefault(u => u.Id == id && !u.IsDeleted)
+
+        var existUser = users.FirstOrDefault(u => u.Id == id)
                 ?? throw new Exception($"This user is not found With this id {id}");
 
         var updatedUser = await userRepository.UpdateAsync(id, existUser);
