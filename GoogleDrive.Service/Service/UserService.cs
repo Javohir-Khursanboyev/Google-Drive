@@ -16,9 +16,9 @@ public class UserService : IUserService
     {
         var users = await userRepository.GetAllAsync();
         var existUser = users.FirstOrDefault(u => u.ChatId == user.ChatId);
-        if(existUser != null) 
+        if (existUser != null)
             return await UpdateAsync(existUser.Id, user.MapTo<UserUpdatedModel>());
-        
+
         var createdUser = userRepository.InsertAsync(user.MapTo<User>());
         return createdUser.MapTo<UserViewModel>();
     }
@@ -36,7 +36,7 @@ public class UserService : IUserService
     public async Task<IEnumerable<UserViewModel>> GetAllAsync()
     {
         var users = await userRepository.GetAllAsync();
-        return users.Where(u => !u.IsDeleted).MapTo<UserViewModel> ();
+        return users.Where(u => !u.IsDeleted).MapTo<UserViewModel>();
     }
 
     public async Task<UserViewModel> GetByIdAsync(long id)

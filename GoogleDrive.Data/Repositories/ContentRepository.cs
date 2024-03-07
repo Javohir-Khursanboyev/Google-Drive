@@ -39,7 +39,6 @@ public class ContentRepository : IContentRepository
         var existContent = await context.contents.FirstAsync(u => u.Id == id);
         existContent.Description = content.Description;
         existContent.UserId = content.UserId;
-        existContent.AlbumId = content.AlbumId;
         existContent.ImageDates = content.ImageDates;
         existContent.UpdatedAt = DateTime.UtcNow;
         existContent.IsDeleted = false;

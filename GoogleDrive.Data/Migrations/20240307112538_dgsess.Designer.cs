@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoogleDrive.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240307094314_added123s222")]
-    partial class added123s222
+    [Migration("20240307112538_dgsess")]
+    partial class dgsess
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,39 +25,6 @@ namespace GoogleDrive.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GoogleDrive.Domain.Entities.Albums.Album", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DeletedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("albums");
-                });
-
             modelBuilder.Entity("GoogleDrive.Domain.Entities.Contents.Content", b =>
                 {
                     b.Property<long>("Id")
@@ -65,9 +32,6 @@ namespace GoogleDrive.Data.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AlbumId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -94,8 +58,6 @@ namespace GoogleDrive.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AlbumId");
 
                     b.HasIndex("UserId");
 
@@ -136,32 +98,13 @@ namespace GoogleDrive.Data.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("GoogleDrive.Domain.Entities.Albums.Album", b =>
-                {
-                    b.HasOne("GoogleDrive.Domain.Entities.Users.User", "user")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("GoogleDrive.Domain.Entities.Contents.Content", b =>
                 {
-                    b.HasOne("GoogleDrive.Domain.Entities.Albums.Album", "Album")
-                        .WithMany()
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GoogleDrive.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Album");
 
                     b.Navigation("User");
                 });

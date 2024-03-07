@@ -14,7 +14,7 @@ public class UserRepository : IUserRepository
     }
     public async Task<bool> DeleteAsync(long id)
     {
-        var existUser = await context.users.FirstAsync(u => u.Id == id && !u.IsDeleted);  
+        var existUser = await context.users.FirstAsync(u => u.Id == id && !u.IsDeleted);
         existUser.IsDeleted = true;
         existUser.DeletedAt = DateTime.UtcNow;
         context.SaveChanges();
@@ -29,7 +29,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> InsertAsync(User user)
     {
-        var createdUser = await context.users.AddAsync(user); 
+        var createdUser = await context.users.AddAsync(user);
         context.SaveChanges();
         return createdUser.Entity;
     }
