@@ -35,5 +35,8 @@ using GoogleDrive.Service.Service;
 //FileStream fileStream = new FileStream("C:\\Users\\user\\Desktop\\Javohir_bot\\javohirsa.png", FileMode.OpenOrCreate, FileAccess.Write);
 //fileStream.Write(model.ImageDates, 0, model.ImageDates.Length);
 internal class Program { 
-    static void Main(string[] args) { }
+    static async Task Main(string[] args) 
+    {
+        
+    }
 }
